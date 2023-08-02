@@ -1,6 +1,7 @@
 import random
-#Cole has helped with the code!
-
+#Cole Kleinebekel has helped with the code!
+#Made by Nivens and Paul
+ 
 #This is when the board should start as 10x10.
 
 cole = False
@@ -36,26 +37,37 @@ def add(row, col, size, dir, name):
         for i in range(size):
             EnemyArr[row][col+i] = name
 
+#Classes of the ships.
 myShips = []
-class Ship:
-    def __init__(self,x,y):
-        self.name = x
-        self.list = y
+class Ship():
+    def __init__(self,length,name):
+        self.__length = length
+        self.__name = name
+    def setLength(self, len):
+        if len>0:
+            self.__length = len
+    def getLength(self):
+        return self.__length
+    def setName(self,shipname):
+        self.__name = shipname
+    def getName(self):
+        return self.__name
+
 
 cole = False
-carrier = Ship("Carrier", [[0,0],[0,5]])
+carrier = Ship(name="Carrier", length=[[0,0],[0,5]])
 myShips.append(carrier)
 
-battleship = Ship("Battleship", [[0,0],[0,4]])
+battleship = Ship(name="Battleship", length=[[0,0],[0,4]])
 myShips.append(battleship)
 
-destroyer = Ship("Destroyer", [[0,0],[0,3]])
+destroyer = Ship(name="Destroyer", length=[[0,0],[0,3]])
 myShips.append(destroyer)
 
-submarine = Ship("Submarine", [[0,0],[0,3]])
+submarine = Ship(name="Submarine", length=[[0,0],[0,3]])
 myShips.append(submarine)
 
-patrol_boat = Ship("Patrol Boat", [[0,0],[0,2]])
+patrol_boat = Ship(name="Patrol Boat", length=[[0,0],[0,2]])
 myShips.append(patrol_boat)
 
 for row in range(len(arr)):
@@ -68,42 +80,42 @@ while True:
     col = random.randrange(0,10)
     dir = random.randrange(0,2) # 0 = vertical, 1 = horizontal
     if Func(row, col, 5, dir):
-        add(row, col, 5, dir, "B")
+        add(row, col, 5, dir, "CA")
         break
 while True:
     row = random.randrange(0,10)
     col = random.randrange(0,10)
     dir = random.randrange(0,2) # 0 = vertical, 1 = horizontal
     if Func(row, col, 4, dir):
-        add(row, col, 4, dir, "G")
+        add(row, col, 4, dir, "BA")
         break
 while True:
     row = random.randrange(0,10)
     col = random.randrange(0,10)
     dir = random.randrange(0,2) # 0 = vertical, 1 = horizontal
     if Func(row, col, 3, dir):
-        add(row, col, 3, dir, "L")
+        add(row, col, 3, dir, "DE")
         break
 while True:
     row = random.randrange(0,10)
     col = random.randrange(0,10)
     dir = random.randrange(0,2) # 0 = vertical, 1 = horizontal
     if Func(row, col, 3, dir):
-        add(row, col, 3, dir, "Z")
+        add(row, col, 3, dir, "SU")
         break
 while True:
     row = random.randrange(0,10)
     col = random.randrange(0,10)
     dir = random.randrange(0,2) # 0 = vertical, 1 = horizontal
     if Func(row, col, 2, dir):
-        add(row, col, 2, dir, "M")
+        add(row, col, 2, dir, "PB")
         break
     
 
 #This is when you are choosing the row you are inputting.
 while True:
     cole = False
-    myShipDir = input('Choose your ship direction (0 = vertical, 1 = horizontal): ')
+    myShipDir = input('Choose your ship direction (0 = vertical, 1 = horizontal): ') #This is when you are choosing the ships to vertically or horizontally.
     try:
         int(myShipDir)
     except:
@@ -180,7 +192,6 @@ for i in range(myShipLength):
         myarr[int(chooserC)-1][int(chooserR)+i-1] = "H"
 
 
-
 #This method that will print the opponent board.
 def printBoard(arr):
     print("Opponent: Chicago Bulls")
@@ -195,13 +206,7 @@ def printMyBoard():
     for r in range(len(myarr)):
         print(myarr[r])
         print()
-        
-
-
-
-
-    
-
+            
 #This is storing the list of allMoves and allShips.
 x = 0
 row = random.randrange(0,int(arrSize))
@@ -209,8 +214,6 @@ col = random.randrange(0,int(arrSize))
 
 allMoves = []
 allShip = []
-
-
 
 #This has something to do with the class of the ships.
 allShip.append
@@ -282,11 +285,11 @@ while True:
                             count += 1
                 if count == 0:
                     print("You destroyed the ship.")
+                    continue
                 
-
-
 #This code command is when you missed the target.
         if not holder:
+            print("Missed.")
             arr[int(Trow)][int(Tcol)] = "X"
     attackR = random.randrange(0,int(arrSize))
     attackC = random.randrange(0,int(arrSize))
@@ -303,6 +306,6 @@ while True:
         printMyBoard()
         
     #This is checking the numbers of rounds left.
-    if x >= 5:
-        print("Eliminated.")
+    if x >= 30:
+        print("Game over.")
         quit()
